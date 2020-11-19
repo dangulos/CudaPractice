@@ -36,7 +36,7 @@ int main(int argc, char **argv)
   {
 
   case 4:
-    //std::cout << "4 options" << argv[1] << argv[2] << argv[3] << std::endl;
+    std::cout << "4 options" << argv[1] << argv[2] << argv[3] << std::endl;
     output_file = "output.png";
     input_file = std::string(argv[1]);
     threads_per_block = atoi(argv[3]);
