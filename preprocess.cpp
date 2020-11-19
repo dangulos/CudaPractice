@@ -28,7 +28,7 @@ void preProcess(uchar4 **inputImage, unsigned char **greyImage,
 
   cv::Mat image;
   // cv::IMREAD_UNCHANGED
-  image = cv::imread(filename.c_str(), cv::IMREAD_UNCHANGED);
+  image = cv::imread(filename.c_str(), CV_LOAD_IMAGE_COLOR);
   if (image.empty()) {
     std::cerr << "Couldn't open file: " << filename << std::endl;
     exit(1);

@@ -19,9 +19,9 @@ void rgba_to_grey_kernel(const uchar4* const rgbaImage,
 
   int indexAux = (x + y * numCols);
   uchar4 px = rgbaImage[indexAux]; // thread pixel to process
-  greyImage[index] = px.x; 
+  greyImage[index + 2] = px.x; 
   greyImage[index + 1] = px.y; 
-  greyImage[index + 2] = px.z;
+  greyImage[index] = px.z;
 }
 
 void rgba_to_grey(uchar4 * const d_rgbaImage,
