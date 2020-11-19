@@ -49,7 +49,7 @@ void rgba_to_grey(uchar4 * const d_rgbaImage,
   // all pixels secuencially in 'x' axis
   //cols => 852
   //rows => 480
-  int totalThreads = blocksPerGrid * threadsPerBlock;
+  int totalThreads = aBlockSize * aGridSize;
   // long long int total_px = 852*480;  // total pixels
   // long int grids_n = ceil(total_px / TxB); // grids numer
   const dim3 blockSize(aBlockSize, 1, 1);
