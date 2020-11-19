@@ -44,12 +44,8 @@ void reduction(uchar4 * const d_originalImage,
                   unsigned char* const d_resizeImage, size_t numRows, size_t numCols, int aBlockSize, int aGridSize)
 {
 
-  //cols => 852
-  //rows => 480
+  
   int totalThreads = aBlockSize * aGridSize;
-  printf("Total threads %d", totalThreads);
-  // long long int total_px = 852*480;  // total pixels
-  // long int grids_n = ceil(total_px / TxB); // grids numer
   const dim3 blockSize(aBlockSize, 1, 1);
   const dim3 gridSize(aGridSize, 1, 1);
   reduction_kernel<<<gridSize, blockSize>>>(d_originalImage, d_resizeImage, numRows, numCols, totalThreads);

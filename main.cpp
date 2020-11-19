@@ -36,12 +36,10 @@ int main(int argc, char **argv)
   {
 
   case 4:
-    std::cout << "4 options" << argv[1] << argv[2] << argv[3] << std::endl;
     output_file = "output.png";
     input_file = std::string(argv[1]);
     threads_per_block = atoi(argv[2]);
     blocks_per_grid = atoi(argv[3]);
-    std::cout << "entra";
     break;
   default:
     std::cerr << "Usage: ./to_bw input_file [output_filename] threads_per_block blocks_per_grid" << std::endl;
@@ -52,6 +50,7 @@ int main(int argc, char **argv)
   preProcess(&h_originalImage, &h_resizeImage, &d_originalImage, &d_resizeImage, input_file);
 
   //call the cuda code
+  printf("Total Threads used: %d | Blocks per Grid: %d\n ", threads_per_block, blocks_per_grid);
   cudaEventRecord(start);
   //int aBlockSize, int aGridSize
   reduction(d_originalImage, d_resizeImage, numRows(), numCols(), threads_per_block, blocks_per_grid);
