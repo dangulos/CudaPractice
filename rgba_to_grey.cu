@@ -33,11 +33,21 @@ void rgba_to_grey(uchar4 * const d_rgbaImage,
   // all pixels secuencially in 'x' axis
   //cols => 852
   //rows => 480
+  cudaEvent_t start, stop;
+  cudaEventCreate(&start);
+  cudaEventCreate(&stop);
+  cudaEventRecord(start);
   long long int total_px = 852*480;  // total pixels
   long int grids_n = ceil(total_px / TxB); // grids numer
   const dim3 blockSize(TxB, 1, 1);
   const dim3 gridSize(grids_n, 1, 1);
   rgba_to_grey_kernel<<<gridSize, blockSize>>>(d_rgbaImage, d_greyImage, numRows, numCols);
+  cudaEventRecord(stop);
+  cudaEventSynchronize(stop);
+
+  float milliseconds = 0;
+  cudaEventElapsedTime(&milliseconds, start, stop);
+  printf("Time elapsed: %ld.%09ld\n", milliseconds);
   
   cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
 }
