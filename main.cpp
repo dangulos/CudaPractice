@@ -24,6 +24,8 @@ int main(int argc, char **argv)
 
   std::string input_file;
   std::string output_file;
+  int threads_per_block;
+  int blocks_per_grid;
 
   //make sure the context initializes ok
   checkCudaErrors(cudaFree(0));
@@ -36,8 +38,8 @@ int main(int argc, char **argv)
     //std::cout << "4 options" << argv[1] << argv[2] << argv[3] << std::endl;
     output_file = "output.png";
     input_file = std::string(argv[1]);
-    int threads_per_block = atoi(argv[3]);
-    int blocks_per_grid = atoi(argv[3]);
+    threads_per_block = atoi(argv[3]);
+    blocks_per_grid = atoi(argv[3]);
     break;
 
   default:
