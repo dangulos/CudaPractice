@@ -40,6 +40,7 @@ int main(int argc, char **argv)
     input_file = std::string(argv[1]);
     threads_per_block = atoi(argv[3]);
     blocks_per_grid = atoi(argv[4]);
+    std::cout << "entra";
     break;
 
   default:
