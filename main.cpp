@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
   //call the cuda code
   cudaEventRecord(start);
-  rgba_to_grey(d_rgbaImage, d_greyImage, numRows(), numCols(),1024,400);
+  rgba_to_grey(d_rgbaImage, d_greyImage, numRows(), numCols(),1024,100);
   cudaEventRecord(stop);
   cudaEventSynchronize(stop);
 
