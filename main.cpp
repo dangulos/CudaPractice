@@ -51,8 +51,8 @@ int main(int argc, char **argv) {
   // cv::namedWindow("to_bw");
   // Display the image m in this window
   // cv::imshow("to_bw", output);
-  cvWaitKey (0);
-  cvDestroyWindow ("to_bw");
+  // cvWaitKey (0);
+  // cvDestroyWindow ("to_bw");
   //output the image
   cv::imwrite(output_file.c_str(), output);
 
