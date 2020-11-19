@@ -5,17 +5,16 @@
 
 // Function calling the kernel to operate
 void reduction(uchar4 *const d_originalImage,
-                  unsigned char *const d_resizeImage,
-                  size_t numRows, size_t numCols,
-                  int aBlockSize, int aGridSize);
+               unsigned char *const d_resizeImage,
+               size_t numRows, size_t numCols,
+               int aBlockSize, int aGridSize);
 
-//include the definitions of the above functions for this homework
+// include the preprocess file
 #include "preprocess.cpp"
 
 int main(int argc, char **argv)
 {
-  // rgbaImage => imagen original
-  // h_resizeImage => imagen reducida
+
   uchar4 *h_originalImage, *d_originalImage;
   unsigned char *h_resizeImage, *d_resizeImage;
 
@@ -34,6 +33,15 @@ int main(int argc, char **argv)
   case 2:
     input_file = std::string(argv[1]);
     output_file = "output.png";
+    break;
+  case 3:
+    std::cout << "3 options" << argv[1] << argv[2] << endl;
+    break;
+  case 4:
+    std::cout << "4 options" << argv[1] << argv[2] << argv[3] << endl;
+    break;
+  case 5:
+    std::cout << "5 options" << argv[1] << argv[2] << argv[3] << argv[4] << endl;
     break;
   default:
     std::cerr << "Usage: ./to_bw input_file [output_filename]" << std::endl;

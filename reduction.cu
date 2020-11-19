@@ -1,6 +1,6 @@
 #include "utils.h"
 #include <stdio.h>
-#include <math.h>       /* ceil */
+#include <math.h>       
 
 // Max Threads per block in GeForce 210
 #define TxB 1024
@@ -44,9 +44,6 @@ void reduction(uchar4 * const d_originalImage,
                   unsigned char* const d_resizeImage, size_t numRows, size_t numCols, int aBlockSize, int aGridSize)
 {
 
-  // Since it does not matter the relative position of a pixel
-  // the block - grid assign strategy will simply be to cover
-  // all pixels secuencially in 'x' axis
   //cols => 852
   //rows => 480
   int totalThreads = aBlockSize * aGridSize;
