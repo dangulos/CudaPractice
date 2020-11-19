@@ -35,13 +35,13 @@ int main(int argc, char **argv)
     output_file = "output.png";
     break;
   case 3:
-    std::cout << "3 options" << argv[1] << argv[2] << endl;
+    std::cout << "3 options" << argv[1] << argv[2] << std::endl;
     break;
   case 4:
-    std::cout << "4 options" << argv[1] << argv[2] << argv[3] << endl;
+    std::cout << "4 options" << argv[1] << argv[2] << argv[3] << std::endl;
     break;
   case 5:
-    std::cout << "5 options" << argv[1] << argv[2] << argv[3] << argv[4] << endl;
+    std::cout << "5 options" << argv[1] << argv[2] << argv[3] << argv[4] << std::endl;
     break;
   default:
     std::cerr << "Usage: ./to_bw input_file [output_filename]" << std::endl;
