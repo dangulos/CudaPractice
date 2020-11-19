@@ -17,6 +17,10 @@ int main(int argc, char **argv) {
   uchar4        *h_rgbaImage, *d_rgbaImage;
   unsigned char *h_greyImage, *d_greyImage;
 
+  cudaEvent_t start, stop;
+  cudaEventCreate(&start);
+  cudaEventCreate(&stop);
+
   std::string input_file;
   std::string output_file;
 
@@ -37,7 +41,14 @@ int main(int argc, char **argv) {
   preProcess(&h_rgbaImage, &h_greyImage, &d_rgbaImage, &d_greyImage, input_file);
 
   //call the cuda code
+  cudaEventRecord(start);
   rgba_to_grey(d_rgbaImage, d_greyImage, numRows(), numCols());
+  cudaEventRecord(stop);
+  cudaEventSynchronize(stop);
+
+  float milliseconds = 0;
+  cudaEventElapsedTime(&milliseconds, start, stop);
+  printf("Time elapsed: %ld.%09ld\n", milliseconds);
 
   //size_t numPixels = numRows()*numCols();
   //cols => 852
