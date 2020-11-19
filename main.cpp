@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
   //cols => 852
   //rows => 480
   size_t numPixels = 480*852;
-  checkCudaErrors(cudaMemcpy(h_greyImage, d_greyImage, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(h_greyImage, d_greyImage, sizeof(unsigned char) * numPixels * 3, cudaMemcpyDeviceToHost));
 
   /* Output the grey image */
   cv::Mat output(480, 852, CV_8UC3, (void*)h_greyImage);
