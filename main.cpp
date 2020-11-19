@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
 
   float milliseconds = 0;
   cudaEventElapsedTime(&milliseconds, start, stop);
-  printf("Time elapsed: %ld.%09ld\n", milliseconds);
+  printf("Time elapsed: %lf\n", milliseconds);
 
   //size_t numPixels = numRows()*numCols();
   //cols => 852
