@@ -27,7 +27,7 @@ void rgba_to_grey_kernel(const uchar4* const rgbaImage,
   for (int aux = initIteration; aux < endIteration; aux++){
     int j = aux % 852;
     int i = (aux - j) / 852;
-    index = (j + i * 852) * 3;
+    index = aux * 3;
     int x = j * (numCols/852.0);
     int y = i * (numRows/480.0);
   
