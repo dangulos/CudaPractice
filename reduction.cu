@@ -6,8 +6,8 @@
 #define TxB 1024
 
 __global__
-void reduction_kernel(const uchar4* const rgbaImage,
-                       unsigned char* const outputImage,
+void reduction_kernel(const uchar4* const originalImage,
+                       unsigned char* const resizeImage,
                        int numRows, int numCols, int totalThreads)
 {
   int aux = blockIdx.x * blockDim.x + threadIdx.x;
@@ -18,10 +18,10 @@ void reduction_kernel(const uchar4* const rgbaImage,
   int y = i * (numRows/480.0);
 
   int indexAux = (x + y * numCols);
-  uchar4 px = rgbaImage[indexAux]; // thread pixel to process
-  greyImage[index + 2] = px.x; 
-  greyImage[index + 1] = px.y; 
-  greyImage[index] = px.z;
+  uchar4 px = originalImage[indexAux]; // thread pixel to process
+  resizeImage[index + 2] = px.x; 
+  resizeImage[index + 1] = px.y; 
+  resizeImage[index] = px.z;
 }
 
 void reduction(uchar4 * const d_originalImage,
@@ -37,7 +37,7 @@ void reduction(uchar4 * const d_originalImage,
   long int grids_n = ceil(total_px / aBlockSize); // grids numer
   const dim3 blockSize(aBlockSize, 1, 1);
   const dim3 gridSize(grids_n, 1, 1);
-  rgba_to_grey_kernel<<<gridSize, blockSize>>>(d_rgbaImage, d_greyImage, numRows, numCols, totalThreads);
+  rgba_to_grey_kernel<<<gridSize, blockSize>>>(d_originalImage, d_resizeImage, numRows, numCols, totalThreads);
   
   cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
 }
