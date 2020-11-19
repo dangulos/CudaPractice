@@ -17,7 +17,7 @@ void rgba_to_grey_kernel(const uchar4* const rgbaImage,
 
   initIteration = (852*480/totalThreads) * id;
 
-  if (id == totalThreads)
+  if (id == totalThreads - 1)
     endIteration = 852*480;
   else
     endIteration = initIteration + ((852*480 / totalThreads));
