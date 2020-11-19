@@ -4,19 +4,20 @@
 #include <stdio.h>
 
 // Function calling the kernel to operate
-void rgba_to_grey(uchar4 * const d_rgbaImage,
-                  unsigned char* const d_greyImage, 
+void reduction(uchar4 *const d_originalImage,
+                  unsigned char *const d_resizeImage,
                   size_t numRows, size_t numCols,
                   int aBlockSize, int aGridSize);
 
 //include the definitions of the above functions for this homework
 #include "preprocess.cpp"
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   // rgbaImage => imagen original
-  // h_greyImage => imagen reducida
-  uchar4        *h_rgbaImage, *d_rgbaImage;
-  unsigned char *h_greyImage, *d_greyImage;
+  // h_resizeImage => imagen reducida
+  uchar4 *h_originalImage, *d_originalImage;
+  unsigned char *h_resizeImage, *d_resizeImage;
 
   cudaEvent_t start, stop;
   cudaEventCreate(&start);
@@ -30,20 +31,21 @@ int main(int argc, char **argv) {
 
   switch (argc)
   {
-	case 2:
-	  input_file = std::string(argv[1]);
-	  output_file = "output.png";
-	  break;
-	default:
-      std::cerr << "Usage: ./to_bw input_file [output_filename]" << std::endl;
-      exit(1);
+  case 2:
+    input_file = std::string(argv[1]);
+    output_file = "output.png";
+    break;
+  default:
+    std::cerr << "Usage: ./to_bw input_file [output_filename]" << std::endl;
+    exit(1);
   }
   //load the image and give us our input and output pointers
-  preProcess(&h_rgbaImage, &h_greyImage, &d_rgbaImage, &d_greyImage, input_file);
+  //preProcess(&h_rgbaImage, &h_resizeImage, &d_rgbaImage, &d_resizeImage, input_file);
+  preProcess(&h_originalImage, &h_resizeImage, &d_originalImage, &d_resizeImage, input_file);
 
   //call the cuda code
   cudaEventRecord(start);
-  rgba_to_grey(d_rgbaImage, d_greyImage, numRows(), numCols(),1024,100);
+  reduction(d_originalImage, d_resizeImage, numRows(), numCols(), 1024, 100);
   cudaEventRecord(stop);
   cudaEventSynchronize(stop);
 
@@ -54,11 +56,11 @@ int main(int argc, char **argv) {
   //size_t numPixels = numRows()*numCols();
   //cols => 852
   //rows => 480
-  size_t numPixels = 480*852;
-  checkCudaErrors(cudaMemcpy(h_greyImage, d_greyImage, sizeof(unsigned char) * numPixels * 3, cudaMemcpyDeviceToHost));
+  size_t numPixels = 480 * 852;
+  checkCudaErrors(cudaMemcpy(h_resizeImage, d_resizeImage, sizeof(unsigned char) * numPixels * 3, cudaMemcpyDeviceToHost));
 
   /* Output the grey image */
-  cv::Mat output(480, 852, CV_8UC3, (void*)h_greyImage);
+  cv::Mat output(480, 852, CV_8UC3, (void *)h_resizeImage);
   // Open the window
   // cv::namedWindow("to_bw");
   // Display the image m in this window
@@ -69,8 +71,8 @@ int main(int argc, char **argv) {
   cv::imwrite(output_file.c_str(), output);
 
   /* Cleanup */
-  cudaFree(d_rgbaImage__);
-  cudaFree(d_greyImage__);
+  cudaFree(liberate_originalImage);
+  cudaFree(liberate_resizeImage);
 
   return 0;
 }

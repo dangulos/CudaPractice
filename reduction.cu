@@ -6,8 +6,8 @@
 #define TxB 1024
 
 __global__
-void rgba_to_grey_kernel(const uchar4* const rgbaImage,
-                       unsigned char* const greyImage,
+void reduction_kernel(const uchar4* const rgbaImage,
+                       unsigned char* const outputImage,
                        int numRows, int numCols, int totalThreads)
 {
 
@@ -33,15 +33,15 @@ void rgba_to_grey_kernel(const uchar4* const rgbaImage,
   
     int indexAux = (x + y * numCols);
     uchar4 px = rgbaImage[indexAux]; // thread pixel to process
-    greyImage[index + 2] = px.x; 
-    greyImage[index + 1] = px.y; 
-    greyImage[index] = px.z;
+    outputImage[index + 2] = px.x; 
+    outputImage[index + 1] = px.y; 
+    outputImage[index] = px.z;
     
   }
 }
 
-void rgba_to_grey(uchar4 * const d_rgbaImage,
-                  unsigned char* const d_greyImage, size_t numRows, size_t numCols, int aBlockSize, int aGridSize)
+void reduction(uchar4 * const d_originalImage,
+                  unsigned char* const d_resizeImage, size_t numRows, size_t numCols, int aBlockSize, int aGridSize)
 {
 
   // Since it does not matter the relative position of a pixel
@@ -55,7 +55,7 @@ void rgba_to_grey(uchar4 * const d_rgbaImage,
   // long int grids_n = ceil(total_px / TxB); // grids numer
   const dim3 blockSize(aBlockSize, 1, 1);
   const dim3 gridSize(aGridSize, 1, 1);
-  rgba_to_grey_kernel<<<gridSize, blockSize>>>(d_rgbaImage, d_greyImage, numRows, numCols, totalThreads);
+  reduction_kernel<<<gridSize, blockSize>>>(d_originalImage, d_resizeImage, numRows, numCols, totalThreads);
   
   cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
 }
