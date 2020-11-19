@@ -28,13 +28,13 @@ void preProcess(uchar4 **inputImage, unsigned char **greyImage,
 
   cv::Mat image;
   // cv::IMREAD_UNCHANGED
-  image = cv::imread(filename.c_str(), CV_LOAD_IMAGE_COLOR);
+  image = cv::imread(filename.c_str(), cv::IMREAD_UNCHANGED);
   if (image.empty()) {
     std::cerr << "Couldn't open file: " << filename << std::endl;
     exit(1);
   }
 
-  cv::cvtColor(image, imageRGBA, CV_BGR2RGBA);
+  cv::cvtColor(image, imageRGBA, cv::IMREAD_UNCHANGED);
 
   //allocate memory for the output
   //cols => 852
