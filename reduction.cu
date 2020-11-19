@@ -37,7 +37,7 @@ void reduction(uchar4 * const d_originalImage,
   long int grids_n = ceil(total_px / aBlockSize); // grids numer
   const dim3 blockSize(aBlockSize, 1, 1);
   const dim3 gridSize(grids_n, 1, 1);
-  rgba_to_grey_kernel<<<gridSize, blockSize>>>(d_originalImage, d_resizeImage, numRows, numCols, totalThreads);
+  reduction_kernel<<<gridSize, blockSize>>>(d_originalImage, d_resizeImage, numRows, numCols, totalThreads);
   
   cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
 }
