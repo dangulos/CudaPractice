@@ -34,7 +34,7 @@ void preProcess(uchar4 **inputImage, unsigned char **greyImage,
     exit(1);
   }
 
-  cv::cvtColor(image, imageRGBA, cv::IMREAD_UNCHANGED);
+  cv::cvtColor(image, imageRGBA, CV_BGR2RGBA);
 
   //allocate memory for the output
   //cols => 852
