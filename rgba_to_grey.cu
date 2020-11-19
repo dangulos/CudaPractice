@@ -50,6 +50,7 @@ void rgba_to_grey(uchar4 * const d_rgbaImage,
   //cols => 852
   //rows => 480
   int totalThreads = aBlockSize * aGridSize;
+  printf("Total threads %d", totalThreads);
   // long long int total_px = 852*480;  // total pixels
   // long int grids_n = ceil(total_px / TxB); // grids numer
   const dim3 blockSize(aBlockSize, 1, 1);
