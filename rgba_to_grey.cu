@@ -15,7 +15,7 @@ void rgba_to_grey_kernel(const uchar4* const rgbaImage,
 
   int id = (blockDim.x * blockIdx.x) + threadIdx.x;
 
-  initIteration = (852*480/totalThreads) * id;
+  initIteration = (852.0*480.0/totalThreads) * id;
 
   if (id == totalThreads - 1)
     endIteration = 852*480;
