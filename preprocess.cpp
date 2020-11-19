@@ -39,7 +39,7 @@ void preProcess(uchar4 **inputImage, unsigned char **greyImage,
   //allocate memory for the output
   //cols => 852
   //rows => 480
-  imageGrey.create(480, 852, CV_8UC1);
+  imageGrey.create(480, 852, CV_8UC3);
 
   //This shouldn't ever happen given the way the images are created
   //at least based upon my limited understanding of OpenCV, but better to check
@@ -55,8 +55,8 @@ void preProcess(uchar4 **inputImage, unsigned char **greyImage,
   const size_t numPixelsReduced = 480 * 852;
   //allocate memory on the device for both input and output
   checkCudaErrors(cudaMalloc(d_rgbaImage, sizeof(uchar4) * numPixels));
-  checkCudaErrors(cudaMalloc(d_greyImage, sizeof(unsigned char) * numPixelsReduced));
-  checkCudaErrors(cudaMemset(*d_greyImage, 0, numPixelsReduced  * sizeof(unsigned char))); //make sure no memory is left laying around
+  checkCudaErrors(cudaMalloc(d_greyImage, sizeof(unsigned char) * numPixelsReduced * 3));
+  checkCudaErrors(cudaMemset(*d_greyImage, 0, 3 * numPixelsReduced  * sizeof(unsigned char))); //make sure no memory is left laying around
 
   //copy input array to the GPU
   checkCudaErrors(cudaMemcpy(*d_rgbaImage, *inputImage, sizeof(uchar4) * numPixels, cudaMemcpyHostToDevice));

@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
   checkCudaErrors(cudaMemcpy(h_greyImage, d_greyImage, sizeof(unsigned char) * numPixels, cudaMemcpyDeviceToHost));
 
   /* Output the grey image */
-  cv::Mat output(480, 852, CV_8UC1, (void*)h_greyImage);
+  cv::Mat output(480, 852, CV_8UC3, (void*)h_greyImage);
   // Open the window
   // cv::namedWindow("to_bw");
   // Display the image m in this window
