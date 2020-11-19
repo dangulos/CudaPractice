@@ -31,7 +31,6 @@ int main(int argc, char **argv)
   checkCudaErrors(cudaFree(0));
   // argv[3] Hilos por bloque
   // argv[4] bloques en el grid
-  std::cout << argc << std::endl;
   switch (argc)
   {
 
