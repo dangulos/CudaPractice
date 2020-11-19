@@ -2,9 +2,9 @@
 # ORIGINAL CODE FROM UDACITY #
 ############################################################################
 # <summary> CMakeLists.txt for OpenCV and CUDA. </summary>
-# <date>    2012-02-07          </date>
-# <author>  Quan Tran Minh. edit by Johannes Kast, Michael Sarahan </author>
-# <email>   quantm@unist.ac.kr  kast.jo@googlemail.com msarahan@gmail.com</email>
+# <date>    2020-11-19          </date>
+# <author>  Daniel Angulo Suescun and Juan Guillermo Sierra from National University from Colombia </author>
+# <email>  dangulos@unal.edu.co jgsierraa@unal.edu.co </email>
 ############################################################################
 
 # collect source files
