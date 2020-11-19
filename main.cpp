@@ -31,6 +31,7 @@ int main(int argc, char **argv)
   checkCudaErrors(cudaFree(0));
   // argv[3] Hilos por bloque
   // argv[4] bloques en el grid
+  std::cout << argc << std::endl;
   switch (argc)
   {
 
@@ -42,7 +43,6 @@ int main(int argc, char **argv)
     blocks_per_grid = atoi(argv[4]);
     std::cout << "entra";
     break;
-
   default:
     std::cerr << "Usage: ./to_bw input_file [output_filename] threads_per_block blocks_per_grid" << std::endl;
     exit(1);
