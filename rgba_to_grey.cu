@@ -13,7 +13,7 @@ void rgba_to_grey_kernel(const uchar4* const rgbaImage,
   int aux = blockIdx.x * blockDim.x + threadIdx.x;
   int j = aux % 852;
   int i = (aux - j) / 852;
-  index = (j + i * 852);
+  int index = (j + i * 852);
   int x = j * (numCols/852.0);
   int y = i * (numRows/480.0);
 
